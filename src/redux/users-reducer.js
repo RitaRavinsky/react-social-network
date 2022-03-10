@@ -37,7 +37,7 @@ let initialState = {
       isFollowing: false,
     },
     {
-      id: 4,
+      id: 5,
       fullname: "Kate Dibiasky",
       userPic: "https://picsum.photos/73",
       status: "Look up!",
