@@ -1,0 +1,20 @@
+.message {
+  background: var(--beige);
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  width: 80%;
+  border-radius: 10px;
+  position: relative;
+}
+.message:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid var(--beige);
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  bottom: -8px;
+}

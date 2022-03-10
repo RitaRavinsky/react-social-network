@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --dark-green: #027373;
+  --green: #038C7F;
+  --light-green: #A9D9D0;
+  --beige: #F2E7DC;
+  --black: #0D0D0D;
+  --white: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins",
+    sans-serif;
+    color: var(--black)
+}
+a {
+  transition:all 0.3s ease;
+  text-decoration: none;
+}
+/* Color Theme Swatches in Hex
+.Microsoft-/-1MSQFT-1-hex { color: #027373; }
+.Microsoft-/-1MSQFT-2-hex { color: #038C7F; }
+.Microsoft-/-1MSQFT-3-hex { color: #A9D9D0; }
+.Microsoft-/-1MSQFT-4-hex { color: #F2E7DC; }
+.Microsoft-/-1MSQFT-5-hex { color: #0D0D0D; } */
+
+.page-wrap {
+    background: #F2E7DC;
+}
+.page-content {
+  min-height: calc(100vh - 200px);
+}
+
+
+aside.sidebar {
+  background: var(--dark-green);
+  height: 100%;
+  min-height: 83vh;
+}
+.sidebar a {
+  color: var(--beige);
+}
+
+

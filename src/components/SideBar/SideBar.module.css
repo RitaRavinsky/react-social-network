@@ -1,0 +1,9 @@
+.navLinks a {
+    color: #f2e7dc;
+    text-decoration: none;
+    padding: 5px 0;
+}
+.navLinks a:hover, .navLinks a.active {
+  color: #fff;
+  font-weight: 500;
+}
