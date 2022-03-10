@@ -3,42 +3,43 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 
 let initialState = {
-  users: [
-    {
-      id: 1,
-      fullname: "Rita Ravinsky",
-      userPic: "https://picsum.photos/70",
-      status: "Hi there!",
-      location: { city: "Haifa", country: "Israel" },
-      isFollowing: true,
-    },
-    {
-      id: 2,
-      fullname: "Jon Snow",
-      userPic: "https://picsum.photos/71",
-      status: "I'm a bastard.",
-      location: { city: "Salt Lake City", country: "USA" },
-      isFollowing: false,
-    },
-    {
-      id: 3,
-      fullname: "Anna Karenina",
-      userPic: "https://picsum.photos/72",
-      status: "Where is a train station?",
-      location: { city: "Moscow", country: "Russia" },
-      isFollowing: false,
-    },
-    {
-      id: 4,
-      fullname: "Kate Dibiasky",
-      userPic: "https://picsum.photos/73",
-      status: "Look up!",
-      location: { city: "East Lansing", country: "USA" },
-      isFollowing: false,
-    },
+  // users: [
+  //   {
+  //     id: 1,
+  //     fullname: "Rita Ravinsky",
+  //     userPic: "https://picsum.photos/70",
+  //     status: "Hi there!",
+  //     location: { city: "Haifa", country: "Israel" },
+  //     isFollowing: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     fullname: "Jon Snow",
+  //     userPic: "https://picsum.photos/71",
+  //     status: "I'm a bastard.",
+  //     location: { city: "Salt Lake City", country: "USA" },
+  //     isFollowing: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     fullname: "Anna Karenina",
+  //     userPic: "https://picsum.photos/72",
+  //     status: "Where is a train station?",
+  //     location: { city: "Moscow", country: "Russia" },
+  //     isFollowing: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     fullname: "Kate Dibiasky",
+  //     userPic: "https://picsum.photos/73",
+  //     status: "Look up!",
+  //     location: { city: "East Lansing", country: "USA" },
+  //     isFollowing: false,
+  //   },
    
-  ],
+  // ],
   usersPerPage: 4,
+  users:[]
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -48,7 +49,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.userId) {
-            return { ...u, isFollowing: true };
+            return { ...u, followed: true };
           }
           return u;
         }),
@@ -59,7 +60,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.userId) {
-            return { ...u, isFollowing: false };
+            return { ...u, followed: false };
           }
           return u;
         }),
