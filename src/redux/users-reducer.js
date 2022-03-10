@@ -36,6 +36,14 @@ let initialState = {
       location: { city: "East Lansing", country: "USA" },
       isFollowing: false,
     },
+    {
+      id: 4,
+      fullname: "Kate Dibiasky",
+      userPic: "https://picsum.photos/73",
+      status: "Look up!",
+      location: { city: "East Lansing", country: "USA" },
+      isFollowing: false,
+    },
   ],
   usersPerPage: 4,
 };
