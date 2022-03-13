@@ -67,6 +67,7 @@ const User = ({
           <li
             onClick={() => handlePageChange(p)}
             className={currentPage === p ? styles.current : ""}
+            key={p}
           >
             {p}
           </li>

@@ -19,20 +19,30 @@ a {
   transition:all 0.3s ease;
   text-decoration: none;
 }
-/* Color Theme Swatches in Hex
-.Microsoft-/-1MSQFT-1-hex { color: #027373; }
-.Microsoft-/-1MSQFT-2-hex { color: #038C7F; }
-.Microsoft-/-1MSQFT-3-hex { color: #A9D9D0; }
-.Microsoft-/-1MSQFT-4-hex { color: #F2E7DC; }
-.Microsoft-/-1MSQFT-5-hex { color: #0D0D0D; } */
-
 .page-wrap {
     background: #F2E7DC;
 }
 .page-content {
   min-height: calc(100vh - 200px);
 }
-
+.loader {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #f2e7dc94;
+    z-index: 99;
+}
+.loader img {
+  width: 80px;
+  height: 80px;
+}
 
 aside.sidebar {
   background: var(--dark-green);
