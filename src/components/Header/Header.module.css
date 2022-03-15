@@ -7,6 +7,7 @@
 
 .headerNav nav {
   background: #050505!important;
+  padding-top: 10px;
 }
 
 .navLinks a {
@@ -16,6 +17,20 @@
 }
 
 .navLinks a:hover, .navLinks a.active {
-  color: #fff;
+  color: var(--white);
   font-weight: 500;
+}
+.navLinks a.btnLogin {
+    padding: 10px 25px;
+    background: var(--white);
+    color: var(--black);
+    margin-left: 60px;
+    margin-top: -10px;
+    min-width: 95px;
+    text-align: center;
+}
+
+.navLinks a.btnLogin:hover {
+    background: var(--beige);
+    color: var(--black);
 }

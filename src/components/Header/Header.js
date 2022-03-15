@@ -2,12 +2,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import styles from "./Header.module.css";
-import {  NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-
-
-const Header = (to) => {
-
+const Header = ({ isAuth, username }) => {
+  console.log(isAuth);
 
   return (
     <div className={styles.headerNav}>
@@ -24,6 +22,7 @@ const Header = (to) => {
             />{" "}
             Social
           </Navbar.Brand>
+
           <Nav className={styles.navLinks}>
             <NavLink
               className={(navData) => (navData.isActive ? styles.active : "")}
@@ -49,6 +48,15 @@ const Header = (to) => {
             >
               Find Friends
             </NavLink>
+            {isAuth ? (
+              <NavLink className={styles.btnLogin} to="/profile">
+                {username}
+              </NavLink>
+            ) : (
+              <NavLink className={styles.btnLogin} to="/login">
+                Login
+              </NavLink>
+            )}
           </Nav>
         </Container>
       </Navbar>

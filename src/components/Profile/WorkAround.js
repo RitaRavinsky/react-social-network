@@ -6,7 +6,9 @@ import { toggleIsFetching, setUserProfile } from "../../redux/profile-reducer";
 const WorkAround = (props) => {
 
   let { userId } = useParams();
-  console.log(userId);
+ if(!userId){
+   userId = 22838;
+ }
 
   return <ProfileContainer userId={userId} {...props} />;
 };

@@ -1,7 +1,5 @@
 import React from "react";
 import { Col, Form, Row, Button } from "react-bootstrap";
-import { updateNewMessageBodyActionCreator, sendMessageActionCreator } from "../../redux/dialogs-reducer";
-
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import Message from "./Message/Message";
