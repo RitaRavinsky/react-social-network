@@ -2,7 +2,7 @@ import styles from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = ({ profilePage, dispatch }) => {
+const Profile = (props) =>  {
   return (
     <section className="profileContent">
       <div
@@ -11,10 +11,11 @@ const Profile = ({ profilePage, dispatch }) => {
           backgroundImage: "url(https://picsum.photos/1000/200)",
         }}
       ></div>
-      <ProfileInfo />
+      <ProfileInfo {...props} />
       <MyPostsContainer />
     </section>
   );
 };
 
 export default Profile;
+

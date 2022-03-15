@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import styles from "./UserItem.module.css";
 
 const User = ({
@@ -25,6 +26,7 @@ const User = ({
         <div className={styles.userItem + " px-3 py-3 mb-3"} key={user.id}>
           <Row>
             <Col className="d-flex">
+              <NavLink to={`/profile/${user.id}`} >
               <img
                 className={styles.userPic}
                 src={
@@ -34,8 +36,9 @@ const User = ({
                       Math.floor(Math.random() * 100) +
                       5
                 }
-                alt=""
+                alt="userpic"
               />
+              </NavLink>
 
               <div className="status-wrap">
                 <h3>{user.name}</h3>

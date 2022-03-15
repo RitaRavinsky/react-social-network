@@ -1,6 +1,22 @@
 .userInfo h1 {
-    font-size: 24px;
+  font-size: 30px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  line-height: 0.8;
 }
 .userPic img {
-    width: 100%;
+  width: 100%;
+}
+.userInfo i {
+  color: var(--green);
+  margin-right: 10px;
+}
+.userInfo b {
+  color: var(--green);
+  font-weight: 500;
+}
+.profileContacts i {
+  color: var(--black);
+  font-size: 23px;
+  margin: 10px 8px 0 0;
 }
