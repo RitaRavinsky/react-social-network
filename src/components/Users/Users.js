@@ -1,17 +1,22 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { followAPI } from "../../api/api";
 import styles from "./UserItem.module.css";
 
-const User = ({
-  users,
-  onUnfollow,
-  onFollow,
-  totalUsersCount,
-  pageSize,
-  currentPage,
-  handlePageChange,
-}) => {
+const User = (props) => {
+  const {
+    users,
+    unfollow,
+    follow,
+    totalUsersCount,
+    pageSize,
+    currentPage,
+    handlePageChange,
+    toggleFollowingProgress,
+    followingInProgress,
+  } = props;
+  console.log(followingInProgress);
   let pagesCount = Math.ceil(totalUsersCount / pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -26,18 +31,18 @@ const User = ({
         <div className={styles.userItem + " px-3 py-3 mb-3"} key={user.id}>
           <Row>
             <Col className="d-flex">
-              <NavLink to={`/profile/${user.id}`} >
-              <img
-                className={styles.userPic}
-                src={
-                  user.photos.small != null
-                    ? user.phono.small
-                    : "https://picsum.photos/" +
-                      Math.floor(Math.random() * 100) +
-                      5
-                }
-                alt="userpic"
-              />
+              <NavLink to={`/profile/${user.id}`}>
+                <img
+                  className={styles.userPic}
+                  src={
+                    user.photos.small != null
+                      ? user.phono.small
+                      : "https://picsum.photos/" +
+                        Math.floor(Math.random() * 100) +
+                        5
+                  }
+                  alt="userpic"
+                />
               </NavLink>
 
               <div className="status-wrap">
@@ -48,15 +53,36 @@ const User = ({
             <Col md={3} className="my-auto ml-auto d-flex flex-row-reverse">
               {user.followed && (
                 <Button
+                  disabled={followingInProgress.some((id) => id === user.id)}
                   variant="outline-dark"
                   className="dblock ml-auto"
-                  onClick={() => onUnfollow(user.id)}
+                  onClick={() => {
+                    toggleFollowingProgress(true, user.id);
+                    followAPI.unfollow(user.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        unfollow(user.id);
+                      }
+                      toggleFollowingProgress(false, user.id);
+                    });
+                  }}
                 >
                   Unfollow
                 </Button>
               )}
               {!user.followed && (
-                <Button variant="dark" onClick={() => onFollow(user.id)}>
+                <Button
+                  disabled={followingInProgress.some((id) => id === user.id)}
+                  variant="dark"
+                  onClick={() => {
+                    toggleFollowingProgress(true, user.id);
+                    followAPI.follow(user.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        follow(user.id);
+                      }
+                      toggleFollowingProgress(false, user.id);
+                    });
+                  }}
+                >
                   Follow
                 </Button>
               )}

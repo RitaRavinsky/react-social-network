@@ -50,7 +50,7 @@ const Header = ({ isAuth, username }) => {
             </NavLink>
             {isAuth ? (
               <NavLink className={styles.btnLogin} to="/profile">
-                {username}
+                hi, {username}
               </NavLink>
             ) : (
               <NavLink className={styles.btnLogin} to="/login">

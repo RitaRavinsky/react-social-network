@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SideBar from "./components/SideBar/SideBar";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import WorkAround from "./components/Profile/WorkAround";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
