@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
@@ -128,7 +130,27 @@ export const toggleIsFetching = (isFetching) => ({
 export const toggleFollowingProgress = (followingInProgress, userId) => ({
   type: FOLLOWING_IN_PROGRESS,
   followingInProgress,
-  userId
+  userId,
 });
+
+// thunks
+export const getUsersThunkCreator = (pageSize=4, currentPage=1) => {
+  return (dispatch) => {
+    // show loader
+    dispatch(toggleIsFetching(true));
+    // ajax
+    usersAPI
+      .getUsers(pageSize, currentPage)
+      .then((data) => {
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+      });
+    //hide loader
+    setTimeout(function () {
+      dispatch(toggleIsFetching(false));
+    }, 500);
+  };
+};
+
 
 export default usersReducer;
