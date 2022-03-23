@@ -9,6 +9,7 @@ import SideBar from "./components/SideBar/SideBar";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileWrapper from "./components/Profile/ProfileWrapper";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/dialogs" element={<DialogsContainer />} />
                 <Route path="/dialog/:id" element={<DialogsContainer />} />
                 <Route path="/users" element={<UsersContainer />} />
+                <Route path="/login" element={<Login />} />
               </Routes>
             </Col>
           </Row>

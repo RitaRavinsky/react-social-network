@@ -5,7 +5,7 @@ import {
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 
-const mapStateToProps = (state) => ({ dialogsPage: state.dialogsPage });
+const mapStateToProps = (state) => ({ dialogsPage: state.dialogsPage, isAuth:state.auth.isAuth });
 
 
 const mapDispatchToProps = (dispatch) => ({
