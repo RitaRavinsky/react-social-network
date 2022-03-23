@@ -1,3 +1,5 @@
+import { authAPI } from "../api/api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
@@ -42,5 +44,26 @@ export const toggleIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
   isFetching: isFetching,
 });
+
+
+// thunks 
+export const authMe = () => {
+  return (dispatch) => {
+    // show loader
+    dispatch(toggleIsFetching(true));
+    // ajax
+    authAPI.authMe().then((data) => {
+      if (data.resultCode === 0) {
+        const { id, email, login } = data.data;
+        dispatch(setAuthUserData(id, email, login));
+      }
+    });
+    //hide loader
+    setTimeout(function () {
+      dispatch(toggleIsFetching(false));
+    }, 500);
+    
+  }
+}
 
 export default authReducer;

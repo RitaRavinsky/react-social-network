@@ -1,25 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
 
-import axios from "axios";
-
-
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    const userId =this.props.userId;
-    let { toggleIsFetching } = this.props;
-    // show loader
-    toggleIsFetching(true);
-    // ajax
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then((res) => {
-        this.props.setUserProfile(res.data);
-      });
-    //hide loader
-    setTimeout(function () {
-      toggleIsFetching(false);
-    }, 500);
+    const userId = this.props.userId;
+    this.props.getProfile(userId);
   }
   render() {
     return <Profile {...this.props} />;

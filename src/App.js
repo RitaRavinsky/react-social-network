@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SideBar from "./components/SideBar/SideBar";
 import UsersContainer from "./components/Users/UsersContainer";
-import WorkAround from "./components/Profile/WorkAround";
+import ProfileWrapper from "./components/Profile/ProfileWrapper";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App() {
@@ -22,9 +22,9 @@ function App() {
             </Col>
             <Col>
               <Routes>
-                <Route path="/" element={<WorkAround />} />
-                <Route path="/profile/" element={<WorkAround />} />
-                <Route path="/profile/:userId" element={<WorkAround />} />
+                <Route path="/" element={<ProfileWrapper />} />
+                <Route path="/profile/" element={<ProfileWrapper />} />
+                <Route path="/profile/:userId" element={<ProfileWrapper />} />
                 <Route path="/dialogs" element={<DialogsContainer />} />
                 <Route path="/dialog/:id" element={<DialogsContainer />} />
                 <Route path="/users" element={<UsersContainer />} />

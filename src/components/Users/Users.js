@@ -1,22 +1,20 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { followAPI } from "../../api/api";
 import styles from "./UserItem.module.css";
 
 const User = (props) => {
   const {
     users,
-    unfollow,
-    follow,
     totalUsersCount,
     pageSize,
     currentPage,
     handlePageChange,
-    toggleFollowingProgress,
     followingInProgress,
+    followThunkCreator,
+    unfollowThunkCreator,
   } = props;
-  console.log(followingInProgress);
+
   let pagesCount = Math.ceil(totalUsersCount / pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -57,13 +55,7 @@ const User = (props) => {
                   variant="outline-dark"
                   className="dblock ml-auto"
                   onClick={() => {
-                    toggleFollowingProgress(true, user.id);
-                    followAPI.unfollow(user.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        unfollow(user.id);
-                      }
-                      toggleFollowingProgress(false, user.id);
-                    });
+                   unfollowThunkCreator(user.id)
                   }}
                 >
                   Unfollow
@@ -74,13 +66,7 @@ const User = (props) => {
                   disabled={followingInProgress.some((id) => id === user.id)}
                   variant="dark"
                   onClick={() => {
-                    toggleFollowingProgress(true, user.id);
-                    followAPI.follow(user.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        follow(user.id);
-                      }
-                      toggleFollowingProgress(false, user.id);
-                    });
+                   followThunkCreator(user.id);
                   }}
                 >
                   Follow

@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
@@ -60,5 +62,21 @@ export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile: profile,
 });
+
+// thunks 
+export const getProfile = (userId) => {
+  return (dispatch) => {
+    // show loader
+    dispatch(toggleIsFetching(true));
+    // ajax
+    profileAPI.getProfile(userId).then((data) => {
+      dispatch(setUserProfile(data));
+    });
+    //hide loader
+    setTimeout(function () {
+      dispatch(toggleIsFetching(false));
+    }, 500);
+  }
+}
 
 export default profileReducer;

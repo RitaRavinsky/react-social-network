@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { followAPI, usersAPI } from "../api/api";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -149,6 +149,30 @@ export const getUsersThunkCreator = (pageSize=4, currentPage=1) => {
     setTimeout(function () {
       dispatch(toggleIsFetching(false));
     }, 500);
+  };
+};
+
+export const followThunkCreator = (userId=22976) => {
+  return (dispatch) => {
+     dispatch(toggleFollowingProgress(true, userId));
+     followAPI.follow(userId).then((data) => {
+       if (data.resultCode === 0) {
+         dispatch(follow(userId));
+       }
+       dispatch(toggleFollowingProgress(false, userId));
+     });
+  }
+}
+
+export const unfollowThunkCreator = (userId = 22976) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    followAPI.unfollow(userId).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(unfollow(userId));
+      }
+      dispatch(toggleFollowingProgress(false, userId));
+    });
   };
 };
 
