@@ -1,14 +1,11 @@
 import React from "react";
 import { Col, Form, Row, Button } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
-const Dialogs = ({ dialogsPage, onAddNewMessage, onMessageInput, isAuth }) => {
-  if (!isAuth) {
-    return <Navigate to="/login" />;
-  }
+const Dialogs = ({ dialogsPage, onAddNewMessage, onMessageInput }) => {
+
 
   // create DialogItem componets array
   let dialogComponents = dialogsPage.dialogs.map((dialog) => (
