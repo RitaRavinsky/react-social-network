@@ -5,6 +5,7 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     const userId = this.props.userId;
     this.props.getProfile(userId);
+    this.props.getStatus(userId)
   }
   render() {
     return <Profile {...this.props} />;

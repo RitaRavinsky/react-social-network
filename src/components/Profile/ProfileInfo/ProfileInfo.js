@@ -2,8 +2,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = ({ profile }) => {
+const ProfileInfo = ({ profile,status, updateStatus }) => {
   if (!profile) {
     return <Preloader />;
   }
@@ -21,12 +22,8 @@ const ProfileInfo = ({ profile }) => {
       </Col>
       <Col md={10}>
         <h1>{profile.fullName}</h1>
-        <div>{profile.aboutMe && profile.aboutMe}</div>
-        {profile.lookingForAJob && <i className="fa-solid fa-hand"></i>}
-        <b>
-          {profile.lookingForAJobDescription &&
-            profile.lookingForAJobDescription}
-        </b>
+        <ProfileStatus updateStatus={updateStatus} status={status} profile={profile} />
+   
         <div className={styles.profileContacts}>
           {profile.contacts.github && (
             <a target="blank" href={profile.contacts.github}>

@@ -17,7 +17,7 @@ export const usersAPI = {
 };
 export const authAPI = {
   authMe() {
-    return instance.get(`auth/me`).then((res) => res.data);
+    return instance.get("auth/me").then((res) => res.data);
   },
 };
 export const followAPI = {
@@ -31,5 +31,11 @@ export const followAPI = {
 export const profileAPI = {
   getProfile(userId) {
     return instance.get(`profile/${userId}`).then((res) => res.data);
+  },
+  getStatus(userId) {
+    return instance.get(`profile/status/${userId}`);
+  },
+  updateStatus(statusText) {
+   return instance.put("profile/status", { status: statusText });
   },
 };

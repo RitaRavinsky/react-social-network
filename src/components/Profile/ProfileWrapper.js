@@ -5,6 +5,8 @@ import {
   toggleIsFetching,
   setUserProfile,
   getProfile,
+  getStatus,
+  updateStatus,
 } from "../../redux/profile-reducer";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
@@ -20,6 +22,7 @@ const ProfileWrapper = (props) => {
 
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  status:state.profilePage.status
 });
 
 // const AuthRedirectComponent = WithAuthRedirect(ProfileWrapper);
@@ -34,6 +37,8 @@ export default compose(
     toggleIsFetching,
     setUserProfile,
     getProfile,
+    getStatus,
+    updateStatus,
   }),
-  WithAuthRedirect
+  // WithAuthRedirect
 )(ProfileWrapper);

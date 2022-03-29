@@ -4,6 +4,7 @@ const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 let initialState = {
   posts: [
@@ -11,8 +12,9 @@ let initialState = {
     { id: "2", message: "Fisrt Post Ever!", likeCount: 33 },
   ],
   newPostText: "",
-  profile:null,
+  profile: null,
   isFetching: false,
+  status: "",
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -40,7 +42,10 @@ const profileReducer = (state = initialState, action) => {
       return { ...state, isFetching: action.isFetching };
 
     case SET_USER_PROFILE:
-      return{ ...state, profile:action.profile };
+      return { ...state, profile: action.profile };
+
+    case SET_STATUS:
+      return { ...state, status: action.status };
 
     default:
       return state;
@@ -63,7 +68,12 @@ export const setUserProfile = (profile) => ({
   profile: profile,
 });
 
-// thunks 
+export const setStatus = (status) => ({
+  type: SET_STATUS,
+  status: status,
+});
+
+// thunks
 export const getProfile = (userId) => {
   return (dispatch) => {
     // show loader
@@ -76,6 +86,25 @@ export const getProfile = (userId) => {
     setTimeout(function () {
       dispatch(toggleIsFetching(false));
     }, 500);
+  };
+};
+
+export const getStatus = (userId) => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId).then((res) => {
+      dispatch(setStatus(res.data));
+    });
+  };
+};
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then((res) => {
+      if(res.data.resultCode === 0) {
+
+        dispatch(setStatus(status))
+      }
+    })
   }
 }
 
