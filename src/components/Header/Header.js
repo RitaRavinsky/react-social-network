@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import styles from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 
-const Header = ({ isAuth, username }) => {
+const Header = ({ isAuth, username, logout }) => {
   console.log(isAuth);
 
   return (
@@ -49,9 +49,14 @@ const Header = ({ isAuth, username }) => {
               Find Friends
             </NavLink>
             {isAuth ? (
-              <NavLink className={styles.btnLogin} to="/profile">
-                hi, {username}
-              </NavLink>
+              <>
+                <NavLink to="/profile" className={styles.loggedinUser}>
+                  hi, {username}
+                </NavLink>
+                <a className={styles.btnLogin} onClick={logout}>
+                  logout
+                </a>
+              </>
             ) : (
               <NavLink className={styles.btnLogin} to="/login">
                 Login

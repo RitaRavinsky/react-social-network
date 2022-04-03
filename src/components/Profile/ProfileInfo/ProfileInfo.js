@@ -4,7 +4,7 @@ import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = ({ profile,status, updateStatus }) => {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
   if (!profile) {
     return <Preloader />;
   }
@@ -22,8 +22,12 @@ const ProfileInfo = ({ profile,status, updateStatus }) => {
       </Col>
       <Col md={10}>
         <h1>{profile.fullName}</h1>
-        <ProfileStatus updateStatus={updateStatus} status={status} profile={profile} />
-   
+        <ProfileStatus
+          updateStatus={updateStatus}
+          status={status}
+          profile={profile}
+        />
+
         <div className={styles.profileContacts}>
           {profile.contacts.github && (
             <a target="blank" href={profile.contacts.github}>

@@ -8,7 +8,6 @@ import {
   getStatus,
   updateStatus,
 } from "../../redux/profile-reducer";
-import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
 
 const ProfileWrapper = (props) => {

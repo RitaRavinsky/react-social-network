@@ -15,6 +15,17 @@ body {
     sans-serif;
     color: var(--black)
 }
+
+input[type=checkbox] {
+  margin-right: 10px;
+}
+textarea, input {
+padding: 5px 10px;
+border:1px solid #d2d2d1;
+outline:none;
+border-radius: 3px;
+}
+
 a {
   transition:all 0.3s ease!important;
   text-decoration: none;
@@ -52,5 +63,7 @@ aside.sidebar {
 .sidebar a {
   color: var(--beige);
 }
-
-
+.errorMessage {
+  color:rgb(253, 71, 71);
+  font-size: 12px;
+}

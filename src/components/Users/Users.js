@@ -34,7 +34,7 @@ const User = (props) => {
                   className={styles.userPic}
                   src={
                     user.photos.small != null
-                      ? user.phono.small
+                      ? user.photos.small
                       : "https://picsum.photos/" +
                         Math.floor(Math.random() * 100) +
                         5

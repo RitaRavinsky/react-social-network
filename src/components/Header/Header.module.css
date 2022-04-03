@@ -34,3 +34,11 @@
     background: var(--beige);
     color: var(--black);
 }
+a.loggedinUser{
+     font-size: 20px;
+    line-height: 1;
+    color: #f2e7dc;
+    font-weight: 500;
+    margin-right: -45px;
+    margin-left: 40px;
+}

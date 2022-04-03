@@ -1,32 +1,30 @@
 .dialogs {
-
-    background: #038C7F;
-    min-height: 83vh;
-    border-right: 1px solid var(--beige);
-    z-index: 1;
+  background: #038c7f;
+  min-height: 83vh;
+  border-right: 1px solid var(--beige);
+  z-index: 1;
 }
 .dialogs a {
-    color:#fff;
-    text-decoration: none;
-    padding: 10px ;
-    display: block;
-    border-bottom:1px solid var(--beige);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  border-bottom: 1px solid var(--beige);
 }
 .dialogs div:first-child {
-     border-top:1px solid var(--beige);
+  border-top: 1px solid var(--beige);
 }
-.dialogMessages > div{
-    background:#A9D9D0;
-    height: 100%;
+.dialogMessages > div {
+  background: #a9d9d0;
+  height: 100%;
 }
 
 .newMessageForm {
-    background-color: var(--green);
-   min-width: calc(100% + 1rem);
-    margin-left: -1rem;
-      color:#fff;
+  background-color: var(--green);
+  min-width: calc(100% + 1rem);
+  margin-left: -1rem;
+  color: #fff;
 }
 section.dialogsWrapper {
-    background:var(--light-green);
-
+  background: var(--light-green);
 }

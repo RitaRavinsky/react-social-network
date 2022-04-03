@@ -1,5 +1,6 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Formik, Form, Field } from "formik";
+import { Form as FormBootstrap } from "react-bootstrap";
 import styles from "./ProfileInfo.module.css";
 
 class ProfileStatus extends React.Component {
@@ -20,20 +21,18 @@ class ProfileStatus extends React.Component {
     this.props.updateStatus(this.state.status);
   };
 
-  handleStatusChange = (e) => {
-console.log(e.currentTarget.value);
+  handleStatusChange = (newStatus) => {
     this.setState({
-      status: e.currentTarget.value,
+      status: newStatus,
     });
   };
 
-  componentDidUpdate (prevProps, prevState){
-    if(prevProps.status !== this.props.status) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status) {
       this.setState({
-        status:this.props.status
-      })
+        status: this.props.status,
+      });
     }
-
   }
 
   render() {
@@ -59,13 +58,36 @@ console.log(e.currentTarget.value);
           )}
           {this.state.editMode && (
             <div className={styles.editStatus} onBlur={this.deactivateEditMode}>
-              <Form>
+              {/* <Form>
                 <Form.Control
                   value={this.props.status}
                   onChange={this.handleStatusChange}
                   autoFocus={true}
                 />
-              </Form>
+              </Form> */}
+              <Formik
+                initialValues={{ newStatus: this.props.status || "hi" }}
+                onSubmit={(values, { setSubmitting, resetForm }) => {
+                  setTimeout(() => {
+                    this.handleStatusChange(values.newStatus);
+                    setSubmitting(false);
+                    resetForm();
+                  }, 400);
+                }}
+              >
+                {({ values, handleSubmit, isSubmitting }) => (
+                  <Form onSubmit={handleSubmit}>
+                    <FormBootstrap.Group>
+                      <Field
+                        name="newStatus"
+                        placeholder={this.props.status || "hi"}
+                        value={values.newStatus}
+                        autoFocus={true}
+                      />
+                    </FormBootstrap.Group>
+                  </Form>
+                )}
+              </Formik>
             </div>
           )}
         </div>
