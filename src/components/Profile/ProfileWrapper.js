@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 import ProfileContainer from "./ProfileContainer";
 import { connect } from "react-redux";
 import {
@@ -11,17 +11,25 @@ import {
 import { compose } from "redux";
 
 const ProfileWrapper = (props) => {
+ 
   let { userId } = useParams();
   if (!userId) {
-    userId = 22838;
+    userId = props.loggedInUserId;
+
   }
 
-  return <ProfileContainer userId={userId} {...props} />;
+  return (
+    <>
+      {!userId && <Navigate to="/login" />}
+      {userId && <ProfileContainer userId={userId} {...props} />}
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status:state.profilePage.status
+  status:state.profilePage.status,
+  loggedInUserId:state.auth.userId
 });
 
 // const AuthRedirectComponent = WithAuthRedirect(ProfileWrapper);

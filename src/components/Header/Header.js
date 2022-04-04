@@ -5,8 +5,6 @@ import styles from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 
 const Header = ({ isAuth, username, logout }) => {
-  console.log(isAuth);
-
   return (
     <div className={styles.headerNav}>
       <Navbar bg="dark" variant="dark">

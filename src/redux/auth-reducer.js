@@ -48,19 +48,19 @@ export const toggleIsFetching = (isFetching) => ({
 // thunks
 export const authMe = () => {
   return (dispatch) => {
-    // show loader
-    dispatch(toggleIsFetching(true));
-    // ajax
-    authAPI.authMe().then((data) => {
+    // // show loader
+    // dispatch(toggleIsFetching(true));
+    // // ajax
+   return authAPI.authMe().then((data) => {
       if (data.resultCode === 0) {
         const { id, email, login } = data.data;
         dispatch(setAuthUserData(id, email, login, true));
       }
     });
-    //hide loader
-    setTimeout(function () {
-      dispatch(toggleIsFetching(false));
-    }, 500);
+    // //hide loader
+    // setTimeout(function () {
+    //   dispatch(toggleIsFetching(false));
+    // }, 500);
   };
 };
 
@@ -76,7 +76,6 @@ export const login = ( email, password, rememberMe = false ) => {
 
 export const logout = () => (dispatch) => {
   authAPI.logout().then((data) => {
-    debugger
     if (data.data.resultCode === 0) {
       dispatch(authMe(null, null, null, false));
     }
