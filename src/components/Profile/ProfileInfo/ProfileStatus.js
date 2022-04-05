@@ -1,104 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Form as FormBootstrap } from "react-bootstrap";
 import styles from "./ProfileInfo.module.css";
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    status: this.props.status,
-  };
-  activateEditMode = () => {
-    this.setState({
-      editMode: true,
-      status: this.props.status,
-    });
-  };
-  deactivateEditMode = () => {
-    this.setState({
-      editMode: false,
-    });
-    this.props.updateStatus(this.state.status);
-  };
-
-  handleStatusChange = (newStatus) => {
-    this.setState({
-      status: newStatus,
-    });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status,
-      });
-    }
+const ProfileStatus = (props) => {
+  let { profile, updateStatus } = props;
+  if (!profile.aboutMe) {
+    profile = {
+      aboutMe: "hi there",
+      lookingForAJob: true,
+      lookingForAJobDescription: "looking for job",
+    };
   }
+  let [editMode, setEditMode] = useState(false);
+  let [status, setStatus] = useState(props.status);
 
-  render() {
-    let { profile } = this.props;
-    if (!profile.aboutMe) {
-      profile = {
-        aboutMe: "hi there",
-        lookingForAJob: true,
-        lookingForAJobDescription: "looking for job",
-      };
-    }
-    return (
-      <section className="profileStatus">
-        <div className="statusWrap">
-          {profile.aboutMe && profile.aboutMe}
-          {!this.state.editMode && (
-            <div
-              className={styles.statusText}
-              onDoubleClick={this.activateEditMode}
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
+
+  const activateEditMode = () => {
+    setEditMode(true);
+  };
+  const deactivateEditMode = () => {
+    setEditMode(false);
+    updateStatus(status);
+  };
+
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus);
+    updateStatus(newStatus);
+  };
+
+  return (
+    <section className="profileStatus">
+      <div className="statusWrap">
+        {profile.aboutMe && profile.aboutMe}
+        {!editMode && (
+          <div className={styles.statusText} onDoubleClick={activateEditMode}>
+            {status || "hi"}
+          </div>
+        )}
+        {editMode && (
+          <div className={styles.editStatus} onBlur={deactivateEditMode}>
+            <Formik
+              initialValues={{ newStatus: status || "hi" }}
+              onSubmit={(values, { setSubmitting, resetForm }) => {
+                setTimeout(() => {
+                  handleStatusChange(values.newStatus);
+                  setSubmitting(false);
+                  setEditMode(false);
+                }, 400);
+              }}
             >
-              {this.props.status || "hi"}
-            </div>
-          )}
-          {this.state.editMode && (
-            <div className={styles.editStatus} onBlur={this.deactivateEditMode}>
-              {/* <Form>
-                <Form.Control
-                  value={this.props.status}
-                  onChange={this.handleStatusChange}
-                  autoFocus={true}
-                />
-              </Form> */}
-              <Formik
-                initialValues={{ newStatus: this.props.status || "hi" }}
-                onSubmit={(values, { setSubmitting, resetForm }) => {
-                  setTimeout(() => {
-                    this.handleStatusChange(values.newStatus);
-                    setSubmitting(false);
-                    resetForm();
-                  }, 400);
-                }}
-              >
-                {({ values, handleSubmit, isSubmitting }) => (
-                  <Form onSubmit={handleSubmit}>
-                    <FormBootstrap.Group>
-                      <Field
-                        name="newStatus"
-                        placeholder={this.props.status || "hi"}
-                        value={values.newStatus}
-                        autoFocus={true}
-                      />
-                    </FormBootstrap.Group>
-                  </Form>
-                )}
-              </Formik>
-            </div>
-          )}
-        </div>
-        {profile.lookingForAJob && <i className="fa-solid fa-hand"></i>}
-        <b>
-          {profile.lookingForAJobDescription &&
-            profile.lookingForAJobDescription}
-        </b>
-      </section>
-    );
-  }
-}
+              {({ values, handleSubmit, isSubmitting }) => (
+                <Form onSubmit={handleSubmit} onBlur={handleSubmit}>
+                  <FormBootstrap.Group>
+                    <Field
+                      name="newStatus"
+                      placeholder={status || "hi"}
+                      value={values.newStatus}
+                      autoFocus={true}
+                    />
+                  </FormBootstrap.Group>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        )}
+      </div>
+      {profile.lookingForAJob && <i className="fa-solid fa-hand"></i>}
+      <b>
+        {profile.lookingForAJobDescription && profile.lookingForAJobDescription}
+      </b>
+    </section>
+  );
+};
 
 export default ProfileStatus;
