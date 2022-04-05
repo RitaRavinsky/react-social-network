@@ -1,4 +1,4 @@
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Navigate,  useParams } from "react-router-dom";
 import ProfileContainer from "./ProfileContainer";
 import { connect } from "react-redux";
 import {

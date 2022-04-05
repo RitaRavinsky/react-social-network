@@ -22,38 +22,15 @@ const Header = ({ isAuth, username, logout }) => {
           </Navbar.Brand>
 
           <Nav className={styles.navLinks}>
-            <NavLink
-              className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/profile"
-            >
-              Profile
-            </NavLink>
-            <NavLink
-              className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/dialogs"
-            >
-              Dialogs
-            </NavLink>
-            <NavLink
-              className={(navData) => (navData.isActive ? styles.active : "")}
-              to="/users"
-            >
-              Find Friends
-            </NavLink>
+        
             {isAuth ? (
               <>
                 <NavLink to="/profile" className={styles.loggedinUser}>
                   hi, {username}
                 </NavLink>
-                <a className={styles.btnLogin} onClick={logout}>
+                <button className={styles.btnLogin} onClick={logout}>
                   logout
-                </a>
+                </button>
               </>
             ) : (
               <NavLink className={styles.btnLogin} to="/login">

@@ -20,25 +20,24 @@
   color: var(--white);
   font-weight: 500;
 }
-.navLinks a.btnLogin {
-    padding: 10px 25px;
+.navLinks .btnLogin {
+    padding: 5px 15px;
     background: var(--white);
     color: var(--black);
     margin-left: 60px;
     margin-top: -10px;
-    min-width: 95px;
+    /* min-width: 95px; */
     text-align: center;
 }
 
-.navLinks a.btnLogin:hover {
+.navLinks .btnLogin:hover {
     background: var(--beige);
     color: var(--black);
 }
-a.loggedinUser{
+.loggedinUser{
      font-size: 20px;
-    line-height: 1;
     color: #f2e7dc;
     font-weight: 500;
+    line-height: 1;
     margin-right: -45px;
-    margin-left: 40px;
 }
