@@ -1,6 +1,6 @@
 import { authMe } from "./auth-reducer";
 
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
+const INITIALIZED_SUCCESS = "rita/app/INITIALIZED_SUCCESS";
 
 let initialState = {
   initialized: false,
@@ -25,12 +25,10 @@ export const initializedSuccess = () => ({
 });
 
 // thunks
-export const initializeApp = () => {
-  return (dispatch) => {
-    let promise = dispatch(authMe());
+export const initializeApp = () => (dispatch) => {
+  let promise = dispatch(authMe());
 
-    Promise.all([promise]).then(() => dispatch(initializedSuccess()));
-  };
+  Promise.all([promise]).then(() => dispatch(initializedSuccess()));
 };
 
 export default appReducer;

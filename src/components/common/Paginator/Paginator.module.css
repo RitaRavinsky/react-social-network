@@ -1,0 +1,13 @@
+.pagination li {
+  cursor:pointer;
+  padding: 5px 3px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+.current, .pagination li:hover {
+  font-weight: bold;
+}

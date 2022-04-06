@@ -1,7 +1,6 @@
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = "rita/auth/SET_USER_DATA";
-const TOGGLE_IS_FETCHING = "rita/auth/TOGGLE_IS_FETCHING";
 
 let initialState = {
   userId: null,
@@ -19,12 +18,6 @@ const authReducer = (state = initialState, action) => {
         ...action.payload,
       };
 
-    case TOGGLE_IS_FETCHING:
-      return {
-        ...state,
-        isFetching: action.isFetching,
-      };
-
     default:
       return state;
   }
@@ -40,46 +33,32 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
     isAuth,
   },
 });
-export const toggleIsFetching = (isFetching) => ({
-  type: TOGGLE_IS_FETCHING,
-  isFetching: isFetching,
-});
 
 // thunks
-export const authMe = () => {
-  return (dispatch) => {
-    // // show loader
-    // dispatch(toggleIsFetching(true));
-    // // ajax
-   return authAPI.authMe().then((data) => {
-      if (data.resultCode === 0) {
-        const { id, email, login } = data.data;
-        dispatch(setAuthUserData(id, email, login, true));
-      }
-    });
-    // //hide loader
-    // setTimeout(function () {
-    //   dispatch(toggleIsFetching(false));
-    // }, 500);
-  };
+export const authMe = () => async (dispatch) => {
+  const data = await authAPI.authMe();
+
+  if (data.resultCode === 0) {
+    const { id, email, login } = data.data;
+    dispatch(setAuthUserData(id, email, login, true));
+  }
 };
 
-export const login = ( email, password, rememberMe = false ) => {
-  return (dispatch) => {
-    authAPI.login(email, password, rememberMe).then((data) => {
-      if (data.data.resultCode === 0) {
-        dispatch(authMe());
-      }
-    });
-  };
-};
+export const login =
+  (email, password, rememberMe = false) =>
+  async (dispatch) => {
+    const data = await authAPI.login(email, password, rememberMe);
 
-export const logout = () => (dispatch) => {
-  authAPI.logout().then((data) => {
     if (data.data.resultCode === 0) {
-      dispatch(authMe(null, null, null, false));
+      dispatch(authMe());
     }
-  });
+  };
+
+export const logout = () => async (dispatch) => {
+  let data = await authAPI.logout();
+  if (data.data.resultCode === 0) {
+    dispatch(authMe(null, null, null, false));
+  }
 };
 
 export default authReducer;

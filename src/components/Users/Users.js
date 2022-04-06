@@ -1,9 +1,8 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import styles from "./UserItem.module.css";
+import Paginator from "../common/Paginator/Paginator";
+import User from "./User";
 
-const User = (props) => {
+const Users = (props) => {
   const {
     users,
     totalUsersCount,
@@ -15,81 +14,28 @@ const User = (props) => {
     unfollowThunkCreator,
   } = props;
 
-  let pagesCount = Math.ceil(totalUsersCount / pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    if (pages.length < 10) {
-      pages.push(i);
-    }
-  }
+let userComponents = users.map((user) => (
+  <User
+    user={user}
+    followingInProgress={followingInProgress}
+    followThunkCreator={followThunkCreator}
+    unfollowThunkCreator={unfollowThunkCreator}
+    key={user.id}
+  />
+));
   return (
     <section className="usersWrapper">
       <h2 className="mb-4">Find Friends</h2>
-      {users.map((user) => (
-        <div className={styles.userItem + " px-3 py-3 mb-3"} key={user.id}>
-          <Row>
-            <Col className="d-flex">
-              <NavLink to={`/profile/${user.id}`}>
-                <img
-                  className={styles.userPic}
-                  src={
-                    user.photos.small != null
-                      ? user.photos.small
-                      : "https://picsum.photos/" +
-                        Math.floor(Math.random() * 100) +
-                        5
-                  }
-                  alt="userpic"
-                />
-              </NavLink>
+      {userComponents && userComponents}
 
-              <div className="status-wrap">
-                <h3>{user.name}</h3>
-                {user.status}
-              </div>
-            </Col>
-            <Col md={3} className="my-auto ml-auto d-flex flex-row-reverse">
-              {user.followed && (
-                <Button
-                  disabled={followingInProgress.some((id) => id === user.id)}
-                  variant="outline-dark"
-                  className="dblock ml-auto"
-                  onClick={() => {
-                   unfollowThunkCreator(user.id)
-                  }}
-                >
-                  Unfollow
-                </Button>
-              )}
-              {!user.followed && (
-                <Button
-                  disabled={followingInProgress.some((id) => id === user.id)}
-                  variant="dark"
-                  onClick={() => {
-                   followThunkCreator(user.id);
-                  }}
-                >
-                  Follow
-                </Button>
-              )}
-            </Col>
-          </Row>
-        </div>
-      ))}
-
-      <ul className={styles.pagination}>
-        {pages.map((p) => (
-          <li
-            onClick={() => handlePageChange(p)}
-            className={currentPage === p ? styles.current : ""}
-            key={p}
-          >
-            {p}
-          </li>
-        ))}
-      </ul>
+      <Paginator
+        handlePageChange={handlePageChange}
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+      />
     </section>
   );
 };
 
-export default User;
+export default Users;

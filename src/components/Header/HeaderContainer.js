@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   setAuthUserData,
-  toggleIsFetching,
   logout
 } from "../../redux/auth-reducer";
 import Header from "./Header";
@@ -21,6 +20,6 @@ const mapStateToProps = (state) => {
     username: state.auth.login,
   };
 };
-export default connect(mapStateToProps, { setAuthUserData, toggleIsFetching, logout })(
+export default connect(mapStateToProps, { setAuthUserData,  logout })(
   HeaderContainer
 );

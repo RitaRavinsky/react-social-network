@@ -1,4 +1,4 @@
-const SEND_MESSAGE = "SEND-MESSAGE";
+const SEND_MESSAGE = "rita/dialogs/SEND_MESSAGE";
 
 let initialState = {
   messages: [
@@ -15,7 +15,6 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case SEND_MESSAGE:
       return {
         ...state,
@@ -35,6 +34,5 @@ export const sendMessageActionCreator = (newMessageBody) => ({
   type: SEND_MESSAGE,
   newMessageBody,
 });
-
 
 export default dialogsReducer;

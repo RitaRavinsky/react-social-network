@@ -13,16 +13,5 @@
   color: var(--dark-green);
   font-size: 28px;
 }
-.current, .pagination li:hover {
-  font-weight: bold;
-}
-.pagination li {
-  cursor:pointer;
-  padding: 5px 3px;
-}
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-}
+
+

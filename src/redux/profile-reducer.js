@@ -1,10 +1,10 @@
 import { profileAPI } from "../api/api";
 
-const ADD_POST = "ADD-POST";
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS";
-const DELETE_POST = "DELETE_POST";
+const ADD_POST = "rita/profile/ADD-POST";
+const TOGGLE_IS_FETCHING = "rita/profile/TOGGLE_IS_FETCHING";
+const SET_USER_PROFILE = "rita/profile/SET_USER_PROFILE";
+const SET_STATUS = "rita/profile/SET_STATUS";
+const DELETE_POST = "rita/profile/DELETE_POST";
 
 let initialState = {
   posts: [
@@ -77,37 +77,31 @@ export const deletePost = (postId) => ({
 });
 
 // thunks
-export const getProfile = (userId) => {
-  return (dispatch) => {
-    // show loader
-    dispatch(toggleIsFetching(true));
-    // ajax
-    profileAPI.getProfile(userId).then((data) => {
-      dispatch(setUserProfile(data));
-    });
-    //hide loader
-    setTimeout(function () {
-      dispatch(toggleIsFetching(false));
-    }, 500);
-  };
+export const getProfile = (userId) => async (dispatch) => {
+  // show loader
+  dispatch(toggleIsFetching(true));
+  // ajax
+  const data = await profileAPI.getProfile(userId);
+  dispatch(setUserProfile(data));
+
+  //hide loader
+  setTimeout(function () {
+    dispatch(toggleIsFetching(false));
+  }, 500);
 };
 
-export const getStatus = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId).then((res) => {
-      dispatch(setStatus(res.data));
-    });
-  };
+export const getStatus = (userId) => async (dispatch) => {
+  const res = await profileAPI.getStatus(userId);
+  if (res.data.resultCode === 0) {
+    dispatch(setStatus(res.data));
+  }
 };
 
-export const updateStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then((res) => {
-      if (res.data.resultCode === 0) {
-        dispatch(setStatus(status));
-      }
-    });
-  };
+export const updateStatus = (status) => async (dispatch) => {
+  const res = await profileAPI.updateStatus(status);
+  if (res.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
 };
 
 export default profileReducer;
