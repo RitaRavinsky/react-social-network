@@ -4,11 +4,12 @@ const ADD_POST = "ADD-POST";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const DELETE_POST = "DELETE_POST";
 
 let initialState = {
   posts: [
-    { id: "1", message: "Hi guys!", likeCount: 18 },
-    { id: "2", message: "Fisrt Post Ever!", likeCount: 33 },
+    { id: 1, message: "Hi guys!", likeCount: 18 },
+    { id: 2, message: "Fisrt Post Ever!", likeCount: 33 },
   ],
   profile: null,
   isFetching: false,
@@ -38,6 +39,12 @@ const profileReducer = (state = initialState, action) => {
     case SET_STATUS:
       return { ...state, status: action.status };
 
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((p) => p.id !== action.postId),
+      };
+
     default:
       return state;
   }
@@ -62,6 +69,11 @@ export const setUserProfile = (profile) => ({
 export const setStatus = (status) => ({
   type: SET_STATUS,
   status: status,
+});
+
+export const deletePost = (postId) => ({
+  type: DELETE_POST,
+  postId,
 });
 
 // thunks

@@ -2,14 +2,14 @@ const SEND_MESSAGE = "SEND-MESSAGE";
 
 let initialState = {
   messages: [
-    { id: "1", message: "Hi!" },
-    { id: "2", message: "What's up?" },
-    { id: "3", message: "<3" },
+    { id: 1, message: "Hi!" },
+    { id: 2, message: "What's up?" },
+    { id: 3, message: "<3" },
   ],
   dialogs: [
-    { contactId: "1", contactName: "Daniel" },
-    { contactId: "2", contactName: "Eitan" },
-    { contactId: "3", contactName: "Iris" },
+    { contactId: 1, contactName: "Daniel" },
+    { contactId: 2, contactName: "Eitan" },
+    { contactId: 3, contactName: "Iris" },
   ],
 };
 

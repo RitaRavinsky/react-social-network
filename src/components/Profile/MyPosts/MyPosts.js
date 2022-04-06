@@ -1,13 +1,14 @@
 import Post from "./Post/Post";
 import styles from "./MyPosts.module.css";
 import NewPostForm from "./NewPostForm";
+import React from "react";
 
-const MyPosts = ({ profilePage, onAddNewPost }) => {
+const MyPosts = React.memo(({ profilePage, onAddNewPost }) => {
  
   let postComponents = profilePage.posts.map((post) => (
     <Post message={post.message} likeCount={post.likeCount} key={post.id} />
   ));
-
+console.log('render')
   return (
     <div className="myPosts">
       <NewPostForm onAddNewPost={onAddNewPost} />
@@ -16,6 +17,7 @@ const MyPosts = ({ profilePage, onAddNewPost }) => {
       {postComponents}
     </div>
   );
-};
+});
+
 
 export default MyPosts;

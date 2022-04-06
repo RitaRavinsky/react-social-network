@@ -1,4 +1,4 @@
-import { Navigate,  useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ProfileContainer from "./ProfileContainer";
 import { connect } from "react-redux";
 import {
@@ -11,11 +11,9 @@ import {
 import { compose } from "redux";
 
 const ProfileWrapper = (props) => {
- 
   let { userId } = useParams();
   if (!userId) {
     userId = props.loggedInUserId;
-
   }
 
   return (
@@ -28,8 +26,8 @@ const ProfileWrapper = (props) => {
 
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status:state.profilePage.status,
-  loggedInUserId:state.auth.userId
+  status: state.profilePage.status,
+  loggedInUserId: state.auth.userId,
 });
 
 // const AuthRedirectComponent = WithAuthRedirect(ProfileWrapper);
@@ -46,6 +44,6 @@ export default compose(
     getProfile,
     getStatus,
     updateStatus,
-  }),
+  })
   // WithAuthRedirect
 )(ProfileWrapper);
