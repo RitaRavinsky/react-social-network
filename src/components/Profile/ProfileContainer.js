@@ -3,9 +3,9 @@ import Profile from "./Profile";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    const userId = this.props.userId;
-    this.props.getProfile(userId);
-    this.props.getStatus(userId)
+    const { userId, getProfile, getStatus } = this.props;
+    getProfile(userId);
+    getStatus(userId);
   }
   render() {
     return <Profile {...this.props} />;

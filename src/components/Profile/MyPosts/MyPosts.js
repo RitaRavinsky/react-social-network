@@ -8,7 +8,6 @@ const MyPosts = React.memo(({ profilePage, onAddNewPost }) => {
   let postComponents = profilePage.posts.map((post) => (
     <Post message={post.message} likeCount={post.likeCount} key={post.id} />
   ));
-console.log('render')
   return (
     <div className="myPosts">
       <NewPostForm onAddNewPost={onAddNewPost} />

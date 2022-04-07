@@ -30,9 +30,10 @@ let userComponents = users.map((user) => (
 
       <Paginator
         handlePageChange={handlePageChange}
-        totalUsersCount={totalUsersCount}
+        totalItemsCount={totalUsersCount}
         pageSize={pageSize}
         currentPage={currentPage}
+        portionSize="15"
       />
     </section>
   );
