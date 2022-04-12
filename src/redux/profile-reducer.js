@@ -5,6 +5,7 @@ const TOGGLE_IS_FETCHING = "rita/profile/TOGGLE_IS_FETCHING";
 const SET_USER_PROFILE = "rita/profile/SET_USER_PROFILE";
 const SET_STATUS = "rita/profile/SET_STATUS";
 const DELETE_POST = "rita/profile/DELETE_POST";
+const SET_AVATAR = "rita/profile/SET_AVATAR";
 
 let initialState = {
   posts: [
@@ -45,6 +46,12 @@ const profileReducer = (state = initialState, action) => {
         posts: state.posts.filter((p) => p.id !== action.postId),
       };
 
+    case SET_AVATAR:
+      return {
+        ...state,
+        profile:{...state.profile, photos:action.photo}
+      }
+
     default:
       return state;
   }
@@ -76,6 +83,11 @@ export const deletePost = (postId) => ({
   postId,
 });
 
+export const setAvatarSuccess = (photo) => ({
+  type: SET_AVATAR,
+  photo,
+});
+
 // thunks
 export const getProfile = (userId) => async (dispatch) => {
   // show loader
@@ -102,5 +114,10 @@ export const updateStatus = (status) => async (dispatch) => {
     dispatch(setStatus(status));
   }
 };
-
+export const saveAvatar = (photo) => async (dispatch) => {
+  const res = await profileAPI.updateAvatar(photo);
+  if(res.data.resultCode === 0){
+    dispatch(setAvatarSuccess(res.data.data.photos));
+  }
+}
 export default profileReducer;

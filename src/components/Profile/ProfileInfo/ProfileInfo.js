@@ -1,16 +1,28 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = ({ profile, status, updateStatus }) => {
+const ProfileInfo = ({
+  profile,
+  status,
+  updateStatus,
+  isOwner,
+  saveAvatar,
+}) => {
   if (!profile) {
     return <Preloader />;
   }
+  const handleFileUpload = (e) => {
+    if (e.target.files.length) {
+      saveAvatar(e.target.files[0]);
+    }
+  };
   return (
     <Row className={styles.userInfo + " py-4"}>
-      <Col className={styles.userPic}>
+      <Col className={styles.userPic} md="2">
         <img
           src={
             profile.photos.large
@@ -65,6 +77,18 @@ const ProfileInfo = ({ profile, status, updateStatus }) => {
             </a>
           )}
         </div>
+      </Col>
+      <Col md="12">
+        {isOwner && (
+          <div>
+            <input type="file" onChange={handleFileUpload} />
+          </div>
+        )}
+        {!isOwner && (
+          <Button variant="outline-dark" className="dblock ml-auto">
+            Unfollow
+          </Button>
+        )}
       </Col>
     </Row>
   );

@@ -7,6 +7,7 @@ import {
   getProfile,
   getStatus,
   updateStatus,
+  saveAvatar,
 } from "../../redux/profile-reducer";
 import { compose } from "redux";
 
@@ -19,7 +20,12 @@ const ProfileWrapper = (props) => {
   return (
     <>
       {!userId && <Navigate to="/login" />}
-      {userId && <ProfileContainer userId={userId} {...props} />}
+      {userId && (
+        <ProfileContainer
+          userId={userId}
+          {...props}
+        />
+      )}
     </>
   );
 };
@@ -44,6 +50,7 @@ export default compose(
     getProfile,
     getStatus,
     updateStatus,
+    saveAvatar,
   })
   // WithAuthRedirect
 )(ProfileWrapper);
